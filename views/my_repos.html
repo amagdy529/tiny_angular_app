@@ -1,73 +1,48 @@
-<body ng-controller="controllerX">
+<div class="panel  panel-default">
+    <div class="panel-heading">
 
+        <form class="form-inline">
+            <span>
+                <h4>Repos <span class="badge">{{repoData.length}}</span>
+                <input ng-model="searchText" placeholder="Find a repo..." class="form-control input-sm">
+                </h4>
+            </span>
+        </form>
 
-    <nav class="navbar navbar-default">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">Angular Routing Example</a>
-          </div>
+    </div>
+    <div class="panel-body">
+        <div class="list-group">
+            <div ng-repeat="repo in repoData | filter:searchText  | orderBy:predicate:reverse" class="list-group-item ">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4>
+                            <small>
+                                <span ng-if="repo.fork" class="octicon octicon-repo-forked"></span>
+                                <span ng-if="!repo.fork" class="octicon octicon-repo"></span>
+                            </small>
+                            <a href="{{repo.html_url}}" target="_blank" >
+                                {{repo.name}}
+                            </a>
+                            <small>{{repo.description}}</small>
+                        </h4>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
-            <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
-          </ul>
+                        <small>
+                            <a href="{{repo.homepage}}" class="">
+                                <i class="fa fa-link"></i> WebPage
+                            </a>
+                        </small>
+                    </div>
+                    <div class="col-md-4">
+                        <dl class="dl-horizontal">
+                          <dt>Last Updated:</dt>
+                          <dd>{{repo.updated_at | date : short : timezone}}</dd>
+                          <dt>Created:</dt>
+                          <dd>{{repo.created_at| date : short : timezone}}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
         </div>
-      </nav>
 
-      <div id="main">
-
-        <!-- angular templating -->
-        <!-- this is where content will be injected -->
-        <div ng-view></div>
-
-      </div>
-          <div class="panel  panel-default">
-              <div class="panel-heading">
-
-                  <form class="form-inline">
-                      <span>
-                          <h4>Repos <span class="badge">{{repoData.length}}</span>
-                          <input ng-model="searchText" placeholder="Find a repo..." class="form-control input-sm">
-                          </h4>
-                      </span>
-                  </form>
-
-              </div>
-              <div class="panel-body">
-                  <div class="list-group">
-                      <div ng-repeat="repo in repoData | filter:searchText  | orderBy:predicate:reverse" class="list-group-item ">
-                          <div class="row">
-                              <div class="col-md-8">
-                                  <h4>
-                                      <small>
-                                          <span ng-if="repo.fork" class="octicon octicon-repo-forked"></span>
-                                          <span ng-if="!repo.fork" class="octicon octicon-repo"></span>
-                                      </small>
-                                      <a href="{{repo.html_url}}" target="_blank" >
-                                          {{repo.name}}
-                                      </a>
-                                      <small>{{repo.description}}</small>
-                                  </h4>
-
-                                  <small>
-                                      <a href="{{repo.homepage}}" class="">
-                                          <i class="fa fa-link"></i> WebPage
-                                      </a>
-                                  </small>
-                              </div>
-                              <div class="col-md-4">
-                                  <dl class="dl-horizontal">
-                                    <dt>Last Updated:</dt>
-                                    <dd>{{repo.updated_at | date : short : timezone}}</dd>
-                                    <dt>Created:</dt>
-                                    <dd>{{repo.created_at| date : short : timezone}}</dd>
-                                  </dl>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-              </div>
-          </div>
-</body>
+    </div>
+</div>

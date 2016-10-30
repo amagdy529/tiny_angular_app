@@ -26,7 +26,13 @@ appX.config(['$routeProvider', function($routeProvider) {
       controller  : 'contactController'
     })
 
-    // route for the contact page
+    // route for the users page
+    .when('/users', {
+      templateUrl : 'views/users.html',
+      controller  : 'usersController'
+    })
+
+    // route for the my repos page
     .when('/myRepos', {
       templateUrl : 'views/my_repos.html',
       controller  : 'controllerX'
@@ -44,7 +50,7 @@ appX.controller('aboutController', function($scope) {
 });
 
 appX.controller('contactController', function($scope) {
-  $scope.message = 'Contact us! JK. This is just a demo.';
+  $scope.message = 'Contact us! Magdy.X This is just a demo.';
 });
 
 
@@ -71,6 +77,30 @@ appX.controller('controllerX' , ['$scope' , '$http' , function($scope,$http){
 
     }]);
 
+
+appX.controller('usersController' , ['$scope' , '$http' , function($scope,$http){
+        // $scope.reposFlag = false ;
+        // $scope.usersFlag = false ;
+        //$scope.username  = 'a' ;
+        //var username = '' ;
+
+        $http.get("https://api.github.com/users?since=1550")
+            .success(function(data){
+              $scope.users = data ;
+              //getRepos();
+            });
+
+
+        $scope.getUser = function(username) {
+          $http.get("https://api.github.com/users/" + username)
+              .success(function(data){
+                $scope.userData = data ;
+              });
+        };
+
+        $scope.predicate = '-updated_at';
+
+    }]);
 
 
 /*

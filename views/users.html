@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg-2" style="background-color:#D7D7D7">
+      <ul ng-repeat="user in users">
+        <li><a href="" ng-click="getUser(user.login)">{{user.login}}</a></li>
+      </ul>
+    </div>
+
+    <div class="col-lg-10">
+      <div class="row">
+        <center>
+          <img src="{{userData.avatar_url}}" />
+        </center>
+      </div>
+      <div class="row"><h3>{{userData.login}}</h3></div>
+      <div class="row">{{userData.bio}}</div>
+
+    </div>
+
+  </div>
+</div>
