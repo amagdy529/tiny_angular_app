@@ -8,20 +8,22 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-
     <!-- Optional theme -->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
     <title>Github users</title>
 
+
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script> -->
 </head>
 
 <!-- define angular controller -->
-<body ng-controller="indexController">
+<body ng-controller="controllerX">
 
   <nav class="navbar navbar-default">
     <div class="container">
@@ -33,6 +35,7 @@
         <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
         <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
         <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+        <li><a href="#myRepos"><i class="fa fa-comment"></i> my repos</a></li>
       </ul>
     </div>
   </nav>
@@ -45,8 +48,58 @@
 
   </div>
 
+  <div class="panel  panel-default">
+      <div class="panel-heading">
+
+          <form class="form-inline">
+              <span>
+                  <h4>Repos <span class="badge">{{repoData.length}}</span>
+                  <input ng-model="searchText" placeholder="Find a repo..." class="form-control input-sm">
+                  </h4>
+              </span>
+          </form>
+
+      </div>
+      <div class="panel-body">
+          <div class="list-group">
+              <div ng-repeat="repo in repoData | filter:searchText  | orderBy:predicate:reverse" class="list-group-item ">
+                  <div class="row">
+                      <div class="col-md-8">
+                          <h4>
+                              <small>
+                                  <span ng-if="repo.fork" class="octicon octicon-repo-forked"></span>
+                                  <span ng-if="!repo.fork" class="octicon octicon-repo"></span>
+                              </small>
+                              <a href="{{repo.html_url}}" target="_blank" >
+                                  {{repo.name}}
+                              </a>
+                              <small>{{repo.description}}</small>
+                          </h4>
+
+                          <small>
+                              <a href="{{repo.homepage}}" class="">
+                                  <i class="fa fa-link"></i> WebPage
+                              </a>
+                          </small>
+                      </div>
+                      <div class="col-md-4">
+                          <dl class="dl-horizontal">
+                            <dt>Last Updated:</dt>
+                            <dd>{{repo.updated_at | date : short : timezone}}</dd>
+                            <dt>Created:</dt>
+                            <dd>{{repo.created_at| date : short : timezone}}</dd>
+                          </dl>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+
 
   </body>
-  <script src="js/angular.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/angular.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/angular-route.min.js"></script>
   <script src="js/app.js" charset="utf-8"></script>
 </html>

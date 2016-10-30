@@ -1,69 +1,26 @@
 // create the module and name it appX
 
-var appX = angular.module('appX', ['ngRoute'])
-//var appX = angular.module('appX',[]);
+
+var appX = angular.module('usersApp',[]);
 
 
-// configure our routes
-appX.config(['$routeProvider', function($routeProvider) {
-  $routeProvider
+appX.controller('usersController' , ['$scope' , '$http' , function($scope,$http){
+        // $scope.reposFlag = false ;
+        // $scope.usersFlag = false ;
+        //$scope.username  = 'a' ;
+        //var username = '' ;
 
-    // route for the home page
-    .when('/', {
-      templateUrl : 'views/home.html',
-      controller  : 'indexController'
-    })
-
-    // route for the about page
-    .when('/about', {
-      templateUrl : 'views/about.html',
-      controller  : 'aboutController'
-    })
-
-    // route for the contact page
-    .when('/contact', {
-      templateUrl : 'views/contact.html',
-      controller  : 'contactController'
-    })
-
-    // route for the contact page
-    .when('/myRepos', {
-      templateUrl : 'views/my_repos.html',
-      controller  : 'controllerX'
-    });
-}]);
-
-// create the controller and inject Angular's $scope
-appX.controller('indexController', function($scope) {
-  // create a message to display in our view
-  $scope.message = 'Everyone come and see how good I look!';
-});
-
-appX.controller('aboutController', function($scope) {
-  $scope.message = 'Look! I am an about page.';
-});
-
-appX.controller('contactController', function($scope) {
-  $scope.message = 'Contact us! JK. This is just a demo.';
-});
-
-
-
-appX.controller('controllerX' , ['$scope' , '$http' , function($scope,$http){
-        $scope.reposFlag = false ;
-        $scope.usersFlag = false ;
-        $scope.username  = 'amagdy529' ;
-
-        $http.get("https://api.github.com/users/" + $scope.username)
+        $http.get("https://api.github.com/users?since=1550")
             .success(function(data){
-              $scope.userData = data ;
-              getRepos();
+              $scope.users = data ;
+              //getRepos();
             });
 
-        var getRepos = function(){
-          $http.get($scope.userData.repos_url)
-              .success(function (data){
-                $scope.repoData = data ;
+        
+        $scope.getUser = function(username) {
+          $http.get("https://api.github.com/users/" + username)
+              .success(function(data){
+                $scope.userData = data ;
               });
         };
 

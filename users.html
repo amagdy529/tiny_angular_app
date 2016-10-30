@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="usersApp">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- <script src="script.js"></script> -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+    <title>Github users</title>
+
+
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script> -->
+</head>
+
+<!-- define angular controller -->
+<body ng-controller="usersController">
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">tiny angular app</a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
+        <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+        <li><a href="#myRepos"><i class="fa fa-comment"></i> my repos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="row">
+
+    <div class="col-lg-4">
+      <ul ng-repeat="user in users">
+        <li><a href="" ng-click="getUser(user.login)">{{user.login}}</a></li>
+      </ul>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="row"><img src="{{userData.avatar_url}}" /></div>
+      <div class="row"><h3>{{userData.login}}</h3></div>
+      <div class="row">{{userData.bio}}</div>
+
+    </div>
+
+  </div>
+
+
+
+  </body>
+  <script type="text/javascript" src="js/angular.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/angular-route.min.js"></script>
+  <script src="js/users.js" charset="utf-8"></script>
+</html>
